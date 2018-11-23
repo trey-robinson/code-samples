@@ -3,13 +3,20 @@ sudo: required
 
 language: python
 python:
-	- "2.7.14"
+ - "2.7.14"
 
 install:
-	- pip install --upgrade setuptools
-	- pip install -r requirements.txt
-	- pip install pytest pytest-cov
-	- pip install coveralls
+ - pip install --upgrade setuptools
+ - pip install -r requirements.txt
+ - pip install pytest pytest-cov
+ - pip install coveralls
 
 script:
-	- python test_palindromes.py
+ - python test_palindromes.py
+ - pylint palindromes.py
+ - pycodestyle palindromes.py
+ - py,st --cov=.
+ - coverage report
+
+after_success:
+  coveralls
